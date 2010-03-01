@@ -1,4 +1,4 @@
-/* created on 25/02/2010 08:17:51 from peg generator V1.0 using '' as input*/
+/* created on 01/03/2010 01:42:25 from peg generator V1.0 using '' as input*/
 
 using Peg.Base;
 using System;
@@ -780,18 +780,19 @@ namespace nLess
            return TreeNT((int)EnLess.hex,()=>
                 In('a','f', 'A','F', '0','9') );
 		}
-        public bool alpha()    /*alpha:
+        public bool alpha()    /*^^alpha:
                       'alpha' s '(' s 'opacity=' variable ')';*/
         {
 
-           return And(()=>  
+           return TreeNT((int)EnLess.alpha,()=>
+                And(()=>  
                      Char('a','l','p','h','a')
                   && s()
                   && Char('(')
                   && s()
                   && Char("opacity=")
                   && variable()
-                  && Char(')') );
+                  && Char(')') ) );
 		}
         public bool s()    /*s: [ ]*;*/
         {

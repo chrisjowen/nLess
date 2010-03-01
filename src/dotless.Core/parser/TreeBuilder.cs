@@ -791,7 +791,7 @@ namespace dotless.Core.parser
         public static INode BuildAlpha(LessPegNode node, ElementBlock parent)
         {
             Guard.ExpectPegNode(node, EnLess.alpha);
-            //> alpha:
+            //> ^^alpha:
             //>       'alpha' s '(' s 'opacity=' variable ')';
 
             var variable = BuildVariable(node.Child, parent);
