@@ -339,9 +339,20 @@ namespace dotless.Core.parser
                 path = HttpContext.Current.Server.MapPath(path);
             }
 
+            if (!File.Exists(path) && Path.GetExtension(path) != ".less")
+                path = path + ".less";
+
             if (File.Exists(path))
             {
-                new ExtensibleEngineImpl(File.ReadAllText(path), parent);
+                var source = File.ReadAllText(path);
+                var sourceDirectory = Path.GetDirectoryName(path);
+                var currentDirectory = Directory.GetCurrentDirectory();
+
+                if(!string.IsNullOrEmpty(sourceDirectory)) Directory.SetCurrentDirectory(sourceDirectory);
+                
+                new ExtensibleEngineImpl(source, parent);
+
+                if (!string.IsNullOrEmpty(sourceDirectory)) Directory.SetCurrentDirectory(currentDirectory);
             }
         }
 
